@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Staravia — Hardware, Web & App Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #F4F1EA;
+    --surface: #FFFFFF;
+    --border: #E2DDD0;
+    --border-soft: #EAE5D9;
+    --text: #16181B;
+    --muted: #6B6F78;
+    --blue: #2E55E8;
+    --blue-dark: #1E3FC4;
+    --blue-tint: #EEF1FD;
+  }
+
+  *{ box-sizing: border-box; margin:0; padding:0; }
+  html{ scroll-behavior: smooth; }
+
+  body{
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,h2,h3{ font-weight: 800; letter-spacing: -0.015em; }
+  a{ color: inherit; text-decoration: none; }
+  :focus-visible{ outline: 2px solid var(--blue); outline-offset: 3px; }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation: none !important; transition: none !important; }
+  }
+
+  .wrap{ max-width: 1180px; margin: 0 auto; padding: 0 32px; }
+
+  /* ---------- Header ---------- */
+  header{
+    background: var(--bg);
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding: 26px 32px;
+    max-width: 1180px;
+    margin: 0 auto;
+  }
+  .logo{
+    font-weight: 800;
+    font-size: 1.4rem;
+    letter-spacing: -0.01em;
+  }
+  .logo span{ color: var(--blue); }
+
+  .nav-links{
+    display:flex;
+    align-items:center;
+    gap: 28px;
+  }
+  .nav-links a.plain{
+    color: var(--muted);
+    font-size: 1rem;
+  }
+  .nav-links a.plain:hover{ color: var(--text); }
+
+  .pill-btn{
+    display:inline-flex;
+    align-items:center;
+    gap: 8px;
+    padding: 11px 22px;
+    border: 1.5px solid var(--blue);
+    border-radius: 999px;
+    color: var(--blue);
+    font-weight: 600;
+    font-size: 0.98rem;
+    white-space: nowrap;
+    background: var(--surface);
+  }
+  .pill-btn:hover{ background: var(--blue); color: #fff; }
+
+  @media (max-width: 760px){
+    .nav-links a.plain{ display:none; }
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{ padding: 96px 0 80px; }
+  .kicker{
+    font-weight: 700;
+    font-size: 0.92rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 22px;
+  }
+  .hero h1{
+    font-size: clamp(2.4rem, 5.2vw, 3.8rem);
+    line-height: 1.08;
+    max-width: 17ch;
+    margin-bottom: 26px;
+  }
+  .hero h1 .accent{ color: var(--blue); }
+  .hero p{
+    color: var(--muted);
+    font-size: 1.15rem;
+    max-width: 58ch;
+    margin-bottom: 40px;
+  }
+
+  .track-list{
+    display:flex;
+    flex-direction:column;
+    gap: 14px;
+    max-width: 640px;
+    margin-bottom: 56px;
+  }
+  .track-pill{
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 15px 26px;
+    font-size: 1.02rem;
+  }
+  .track-pill b{ font-weight: 700; }
+  .track-pill span{ color: var(--muted); }
+
+  .hero-actions{ display:flex; gap: 14px; flex-wrap: wrap; }
+  .btn-solid{
+    padding: 14px 26px;
+    border-radius: 999px;
+    background: var(--blue);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.98rem;
+  }
+  .btn-solid:hover{ background: var(--blue-dark); }
+
+  /* ---------- Section shared ---------- */
+  section{ padding: 84px 0; border-top: 1px solid var(--border-soft); }
+  .section-head{
+    margin-bottom: 48px;
+    max-width: 62ch;
+  }
+  .section-head .eyebrow{
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 14px;
+  }
+  .section-head h2{
+    font-size: clamp(1.7rem, 3.2vw, 2.3rem);
+    margin-bottom: 14px;
+  }
+  .section-head p{ color: var(--muted); font-size: 1.05rem; }
+
+  /* ---------- Columns: Thinkstick / Web / App ---------- */
+  .columns{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .column{
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 34px 30px 36px;
+  }
+  .col-tag{
+    display:inline-block;
+    border: 1.5px solid var(--blue);
+    color: var(--blue);
+    font-weight: 700;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 999px;
+    margin-bottom: 20px;
+  }
+  .column h3{ font-size: 1.35rem; margin-bottom: 12px; }
+  .column > p{ color: var(--muted); font-size: 0.98rem; margin-bottom: 24px; }
+
+  .feature-list{ list-style:none; display:flex; flex-direction:column; gap: 16px; }
+  .feature-list li{
+    font-size: 0.96rem;
+    font-weight: 600;
+    padding-left: 20px;
+    position: relative;
+  }
+  .feature-list li::before{
+    content:"";
+    position:absolute;
+    left:0; top: 9px;
+    width: 8px; height: 2px;
+    border-radius: 2px;
+    background: var(--blue);
+  }
+  .feature-list li span{
+    display:block;
+    color: var(--muted);
+    font-weight: 400;
+    font-size: 0.9rem;
+    margin-top: 3px;
+  }
+
+  @media (max-width: 900px){
+    .columns{ grid-template-columns: 1fr; }
+  }
+
+  /* ---------- About ---------- */
+  .about-grid{
+    display:grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 56px;
+  }
+  .about-grid p{
+    color: var(--muted);
+    font-size: 1.05rem;
+    margin-bottom: 18px;
+    max-width: 58ch;
+  }
+  .about-facts{
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 32px;
+    display:flex;
+    flex-direction:column;
+    gap: 22px;
+    height: fit-content;
+  }
+  .about-facts .f-label{
+    font-weight: 700;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 4px;
+  }
+  .about-facts .f-val{ font-size: 1rem; font-weight: 600; }
+
+  @media (max-width: 800px){
+    .about-grid{ grid-template-columns: 1fr; }
+  }
+
+  /* ---------- Process ---------- */
+  .process{
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  .step{
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 28px 24px;
+  }
+  .step .s-index{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: var(--blue-tint);
+    color: var(--blue);
+    font-weight: 700;
+    font-size: 0.85rem;
+    margin-bottom: 16px;
+  }
+  .step h4{ font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; }
+  .step p{ color: var(--muted); font-size: 0.9rem; }
+
+  @media (max-width: 800px){ .process{ grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 520px){ .process{ grid-template-columns: 1fr; } }
+
+  /* ---------- CTA ---------- */
+  .cta-box{
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 56px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .cta-box h2{ font-size: clamp(1.5rem, 3vw, 2rem); max-width: 20ch; }
+  .cta-box p{ color: var(--muted); margin-top: 10px; max-width: 42ch; }
+  .cta-actions{ display:flex; gap: 14px; flex-wrap: wrap; }
+
+  /* ---------- Footer ---------- */
+  footer{ padding: 48px 0 60px; }
+  .foot-grid{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+  .foot-grid .logo{ margin-bottom: 10px; }
+  footer .tag{ color: var(--muted); font-size: 0.95rem; max-width: 36ch; }
+  .foot-links{ display:flex; gap: 26px; font-size: 0.95rem; color: var(--muted); flex-wrap: wrap; }
+  .foot-links a:hover{ color: var(--blue); }
+  .foot-bottom{
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-soft);
+    display:flex;
+    justify-content:space-between;
+    color: var(--muted);
+    font-size: 0.85rem;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="logo">STAR<span>AVIA</span></div>
+    <div class="nav-links">
+      <a class="plain" href="#work">internships</a>
+      <a class="pill-btn" href="https://intern.thinkstick.in/verify" target="_blank" rel="noopener">Verify certificate →</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero wrap" style="border-top:none;">
+    <div class="kicker">STARAVIA · PRODUCT & CLIENT STUDIO</div>
+    <h1>We build hardware, <span class="accent">and ship software around it.</span></h1>
+    <p>Staravia is a small studio out of Pondicherry. We build ThinkStick, our own line of offline AI hardware, and take on web and app development for clients who need things built properly and shipped fast.</p>
+
+    <div class="track-list">
+      <div class="track-pill"><b>ThinkStick</b> <span>— offline AI hardware, on-device inference</span></div>
+      <div class="track-pill"><b>Web development</b> <span>— product sites, dashboards, full-stack builds</span></div>
+      <div class="track-pill"><b>App development</b> <span>— cross-platform mobile, MVPs, store-ready releases</span></div>
+    </div>
+
+    <div class="hero-actions">
+      <a class="btn-solid" href="#work">See what we build</a>
+      <a class="pill-btn" href="#contact">Start a project →</a>
+    </div>
+  </section>
+
+  <section id="work" class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">What we build</div>
+      <h2>Three things, one small team</h2>
+      <p>ThinkStick is the product we own. Web and app development is client work we take on alongside it.</p>
+    </div>
+
+    <div class="columns">
+      <!-- THINKSTICK -->
+      <div class="column">
+        <span class="col-tag">Hardware</span>
+        <h3>ThinkStick</h3>
+        <p>Offline AI hardware — a Pi-based device that runs models on-device, with no cloud dependency and no internet required to work.</p>
+        <ul class="feature-list">
+          <li>On-device inference<span>Quantized models tuned to run locally, with no round trip to a server.</span></li>
+          <li>USB gadget mode<span>Plugs in and presents itself directly — no separate app or driver install needed.</span></li>
+          <li>Offline by design<span>Built for places and use cases where connectivity isn't guaranteed.</span></li>
+          <li>Firmware we control<span>Custom embedded builds, so the hardware and the model stay in sync.</span></li>
+        </ul>
+      </div>
+
+      <!-- WEB DEV -->
+      <div class="column">
+        <span class="col-tag">Web</span>
+        <h3>Web development</h3>
+        <p>Product sites, dashboards, and client-facing web apps — built to load fast and hold up under real traffic.</p>
+        <ul class="feature-list">
+          <li>Marketing & product sites<span>Fast, SEO-ready front ends for launches and landing pages.</span></li>
+          <li>Internal dashboards<span>Admin panels and tools your team actually uses daily.</span></li>
+          <li>Full-stack builds<span>Front end, API, and database, handled as one connected system.</span></li>
+          <li>Ongoing support<span>We stay on after launch for fixes, features, and upkeep.</span></li>
+        </ul>
+      </div>
+
+      <!-- APP DEV -->
+      <div class="column">
+        <span class="col-tag">App</span>
+        <h3>App development</h3>
+        <p>Mobile and cross-platform apps — from a first MVP to a product ready for the app stores.</p>
+        <ul class="feature-list">
+          <li>Cross-platform builds<span>One codebase targeting iOS and Android where it makes sense.</span></li>
+          <li>MVP delivery<span>Scoped builds to get an early version in front of real users fast.</span></li>
+          <li>API & backend integration<span>Apps wired into your existing services, or ones we build alongside.</span></li>
+          <li>Store-ready release<span>We handle the packaging, signing, and submission process.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="wrap">
+    <div class="about-grid">
+      <div>
+        <div class="eyebrow" style="font-weight:700; font-size:0.9rem; letter-spacing:0.04em; text-transform:uppercase; color:var(--blue); margin-bottom:14px;">About Staravia</div>
+        <h2 style="margin-bottom:18px; font-size: clamp(1.7rem, 3.2vw, 2.3rem);">A small team, shipping our own hardware and other people's software.</h2>
+        <p>Staravia runs two kinds of work side by side. ThinkStick is our own product — offline AI hardware we design, build, and support ourselves. Web and app development is where we take on outside projects, building sites, dashboards, and apps for teams who need a working product, not just a proposal.</p>
+        <p>Interns and new hires work directly on whichever of these is live at the time — there's no separate "practice" track. What you build during an internship with us is what ends up shipped.</p>
+      </div>
+      <div class="about-facts">
+        <div><div class="f-label">Location</div><div class="f-val">Remote & on-site, Pondicherry</div></div>
+        <div><div class="f-label">Focus areas</div><div class="f-val">Hardware/firmware, ML ops, web, app, client delivery</div></div>
+        <div><div class="f-label">Own product</div><div class="f-val">ThinkStick — offline AI hardware</div></div>
+        <div><div class="f-label">Contact</div><div class="f-val">careers@darksyntax.in</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="process" class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">How we work</div>
+      <h2>How a project runs</h2>
+      <p>Whether it's a ThinkStick feature or a client build, the shape of the work is the same.</p>
+    </div>
+    <div class="process">
+      <div class="step"><div class="s-index">1</div><h4>Scope</h4><p>We define what's actually being built, and what "done" looks like, before writing anything.</p></div>
+      <div class="step"><div class="s-index">2</div><h4>Build</h4><p>Work happens in short cycles with something to look at early, not just at the end.</p></div>
+      <div class="step"><div class="s-index">3</div><h4>Review</h4><p>You see it running — on device, in browser, or on a real phone — before we call it finished.</p></div>
+      <div class="step"><div class="s-index">4</div><h4>Ship & support</h4><p>We hand it off and stay reachable for fixes and the next round of changes.</p></div>
+    </div>
+  </section>
+
+  <section class="wrap" id="contact">
+    <div class="cta-box">
+      <div>
+        <h2>Have a build in mind?</h2>
+        <p>Tell us what you're trying to ship — hardware, web, or app — and we'll tell you honestly if we're the right fit.</p>
+      </div>
+      <div class="cta-actions">
+        <a class="btn-solid" href="mailto:careers@darksyntax.in">Email us</a>
+        <a class="pill-btn" href="https://intern.thinkstick.in" target="_blank" rel="noopener">Apply for an internship →</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <div class="foot-grid">
+    <div>
+      <div class="logo">STAR<span>AVIA</span></div>
+      <div class="tag">Hardware, web, and app development — one small studio, out of Pondicherry.</div>
+    </div>
+    <div class="foot-links">
+      <a href="#work">Products & Work</a>
+      <a href="https://intern.thinkstick.in" target="_blank" rel="noopener">Internships</a>
+      <a href="https://intern.thinkstick.in/verify" target="_blank" rel="noopener">Verify certificate</a>
+      <a href="mailto:careers@darksyntax.in">Contact</a>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© <span id="year"></span> Staravia — the team behind ThinkStick.</span>
+    <span>Applications & inquiries reviewed on a rolling basis.</span>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
